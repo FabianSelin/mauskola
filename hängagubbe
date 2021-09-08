@@ -1,0 +1,67 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
+namespace Bajs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int lives = 5;
+            bool won = false;
+            string secretWord = "program";
+
+            string input;
+            List<char> correctGuesses = new List<char>();
+            List<char> incorrectGuesses = new List<char>();
+
+            StringBuilder displayToPlayer = new StringBuilder("");
+
+            for (int i = 0; i < secretWord.Length; i++)
+            {
+                displayToPlayer.Append('_');
+            }
+
+
+            while (lives > 0)
+            {
+                Console.WriteLine(displayToPlayer);
+                Console.WriteLine("Gissa en bokstav");
+                input = Console.ReadLine();
+                char guess = input[0];
+                if (secretWord.Contains(guess))
+                {
+                    Console.WriteLine("Du gissa rätt");
+
+
+
+                }
+                else
+                {
+                    Console.WriteLine("du gissa fel");
+                    lives--;
+                    Console.WriteLine("Du har kvar :" + lives);
+
+                }
+                if (input.Length > 0)
+                {
+                    guess = input[0];
+                    if (correctGuesses.Contains(guess) || incorrectGuesses.Contains(guess))
+
+                    {
+                        Console.WriteLine("Du har redan gissat på den");
+                    }
+                    else if (secretWord.Contains(guess))
+                    {
+                        correctGuesses.Add(guess);
+
+                        for (int i = 0; i < secretWord.Length; i++)
+                        {
+                            if (secretWord[i] == guess)
+                            {
+                                displayToPlayer[i] = secretWord[i];
+                            }
+                            else
+                            {
+                                incorrectGuesses.Add(guess);
